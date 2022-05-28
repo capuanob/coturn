@@ -13,17 +13,18 @@ WORKDIR /coturn
 
 ## Build
 RUN ./configure
-RUN make -j$(nproc)
+RUN make -j$(nproc) && make install
 
 ## Prepare all library dependencies for copy
-#RUN mkdir /deps
-#RUN cp `ldd sdr_server | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | sort | uniq` /deps 2>/dev/null || :
+RUN mkdir /deps
+RUN cp `ldd bin/turnserver | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | sort | uniq` /deps 2>/dev/null || :
 
 ## Package Stage
 
-#FROM --platform=linux/amd64 ubuntu:20.04
-#COPY --from=builder /sdr-server/build/sdr_server /sdr_server
-#COPY --from=builder /sdr-server/build/configuration.config /configuration.config
-#COPY --from=builder /deps /usr/lib
+FROM --platform=linux/amd64 ubuntu:20.04
+COPY --from=builder /coturn/bin/ /coturn
+COPY --from=builder /coturn/fuzzturnserver.conf /fuzzturnserver.conf
+COPY --from=builder /deps /usr/lib
 
-#CMD ["/sdr_server", "configuration.config"]
+
+CMD ["/coturn/turnserver", "-c", "/fuzzturnserver.conf"]
