@@ -1,12 +1,12 @@
 image: ghcr.io/capuanob/coturn-fuzz:latest
 project: coturn
-target: turnserver
+target: turnserver-fuzz
 tests:
   - file://corpus
 
 cmds:
-  - cmd: /turnserver
+  - cmd: /coturn/turnserver -c /fuzzturnserver.conf
     network:
       client: false
-      url: udp://127.0.0.1:3479
-      timeout: 2.0
+      url: tcp://127.0.0.1:3478
+      timeout: 5.0
