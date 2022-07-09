@@ -21,3 +21,4 @@ FROM --platform=linux/amd64 ubuntu:20.04
 RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y libevent-dev libssl-dev
 COPY --from=builder /coturn/dist /coturn
+COPY --from=builder /coturn/fuzzturnserver.conf /fuzzturnserver.conf
