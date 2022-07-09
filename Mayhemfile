@@ -1,11 +1,11 @@
 image: ghcr.io/capuanob/coturn-fuzz:latest
 project: coturn
 target: turnserver-fuzz
-tests:
+testsuite:
   - file://corpus
 
 cmds:
-  - cmd: /coturn/bin/turnserver -c /coturn/fuzzturnserver.conf
+  - cmd: /coturn/bin/turnserver -c /fuzzturnserver.conf
     network:
       client: false
       url: tcp://127.0.0.1:3478
