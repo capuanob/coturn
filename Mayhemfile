@@ -5,8 +5,8 @@ tests:
   - file://corpus
 
 cmds:
-  - cmd: /coturn/turnserver -c /fuzzturnserver.conf
+  - cmd: /coturn/bin/turnserver -c /coturn/fuzzturnserver.conf
     network:
       client: false
       url: tcp://127.0.0.1:3478
-      timeout: 5.0
+      timeout: 2.0
