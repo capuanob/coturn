@@ -9,4 +9,4 @@ cmds:
     network:
       client: false
       url: tcp://127.0.0.1:3478
-      timeout: 2.0
+      timeout: 4.0
