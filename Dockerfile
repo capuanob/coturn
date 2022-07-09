@@ -19,6 +19,6 @@ RUN make -j$(nproc) install
 ## Package Stage
 FROM --platform=linux/amd64 ubuntu:20.04
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get install -y libevent-dev libssl-dev
+	DEBIAN_FRONTEND=noninteractive apt-get install -y libssl1.1 libevent-2.1-7 libevent-pthreads-2.1-7 libevent-extra-2.1-7 libevent-openssl-2.1-7
 COPY --from=builder /coturn/dist /coturn
 COPY --from=builder /coturn/fuzzturnserver.conf /fuzzturnserver.conf
