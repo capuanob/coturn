@@ -6,9 +6,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y git cmake clang autoconf automake pkg-config libevent-dev libssl-dev
 
 ## Add source code to the build stage. ADD prevents git clone being cached when it shouldn't
-WORKDIR /
-ADD https://api.github.com/repos/capuanob/coturn/git/refs/heads/mayhem version.json
-RUN git clone -b mayhem https://github.com/capuanob/coturn.git
+ADD . /coturn
 WORKDIR /coturn
 
 ## Build
