@@ -3,9 +3,9 @@ FROM --platform=linux/amd64 ubuntu:20.04 as builder
 
 ## Install build dependencies.
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y cmake clang autoconf automake pkg-config libevent-dev libssl-dev git
+    DEBIAN_FRONTEND=noninteractive apt-get install -y git cmake clang autoconf automake pkg-config libevent-dev libssl-dev
 
-# Add code
+## Add source code to the build stage. ADD prevents git clone being cached when it shouldn't
 ADD . /coturn
 WORKDIR /coturn
 
