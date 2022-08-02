@@ -1,5 +1,6 @@
 *
 
+!fuzzturnserver.conf
 !docker/coturn/alpine/
 !docker/coturn/debian/
 !docker/coturn/rootfs/
